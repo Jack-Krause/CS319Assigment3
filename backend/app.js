@@ -33,6 +33,6 @@ app.get("/listProducts", async(req, res) => {
         .toArray();
     console.log(results);
     res.status(200);
-    res.send(result);
+    res.send(results);
 });
 
