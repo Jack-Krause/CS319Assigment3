@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import DeleteView from "./components/DeleteView";
-import NavBar from "./components/DeleteView";
+import NavBar from "./components/NavBar";
 import PostView from "./components/PostView";
 import ReadView from "./components/ReadView";
 import StudentInfo from "./components/StudentInfo";
