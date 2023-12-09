@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import "backend/app.js";
+import "..backend/app.js";
 
 // Main page for app
 function InitialAppView() {
