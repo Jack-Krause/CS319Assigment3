@@ -4,4 +4,11 @@ var app = express();
 var fs = require("fs");
 var bodyParser = require("body-parser");
 var axios = require("axios");
-const { MongoClient } = require("mongodbg");
+const { MongoClient } = require("mongodb");
+
+app.use(cors());
+app.use(bodyParser.json());
+
+const port = "8081";
+const host = "localhost";
+
