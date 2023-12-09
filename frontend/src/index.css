@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.bg-grey {
+  background-color: lightslategrey;
+}
+
+.text-title {
+  font-size: 75px;
+  color:coral;
+}
+
+.text-general {
+  font-size: 50px;
+}
+

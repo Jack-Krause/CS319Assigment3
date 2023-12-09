@@ -5,10 +5,9 @@ import './index.css';
 
 // Main page for app
 function InitialAppView() {
-
   return (
     <>
-    <div className="container-fluid vh-100 d-flex flex-column bg-grey">
+      <div className="container-fluid vh-100 d-flex flex-column bg-grey">
         <header className="container-fluid bg-black text-white">
           <nav className="navbar navbar-expand-lg navbar-light">
             <div className="container-fluid">
