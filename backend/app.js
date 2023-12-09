@@ -12,3 +12,7 @@ app.use(bodyParser.json());
 const port = "8081";
 const host = "localhost";
 
+app.listen(port, () => {
+    console.log("App listening at http://%s:%s", host, port);
+});
+
