@@ -22,4 +22,3 @@ export const getFromDb = async () => {
         throw err;
     }
 };
-

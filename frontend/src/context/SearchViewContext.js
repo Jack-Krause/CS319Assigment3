@@ -29,7 +29,7 @@ export const SearchViewProvider = ({ children }) => {
   };
 
   return (
-    <SearchViewContext.Provider value={{ searchId, setSearchId }}>
+    <SearchViewContext.Provider value={{ searchId, setSearchId, fetchId, fetchAllProducts }}>
       {children}
     </SearchViewContext.Provider>
   );
