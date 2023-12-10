@@ -44,8 +44,9 @@ app.get("/getProduct/:id", async(req, res) => {
     console.log("Node connected successfully to MongoDB for GET-id");
     const query = {"id": productId}
 
-    const results = await db.collection("fakestore_catalog")
-        .findOne(query);
+    const results = await db
+        .collection("fakestore_catalog")
+        .findOne(query)
 
     console.log("Result:", results);
     if (!results) {

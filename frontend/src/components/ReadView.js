@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { getFromDb, getByIdFromDb } from "../services/ApiService";
 import { useSearchView } from "../context/SearchViewContext";
 
@@ -13,39 +13,34 @@ const ReadView = () => {
   };
 
   const handleSearching = async () => {
+    var container = document.getElementById("productContainer");
+    container.innerHTML = "";
     try {
-      let products = null;
+      var tempResponse = null;
 
       if (searchId > 0) {
-        products = await fetchId(searchId);
+        tempResponse = await fetchId(searchId);
       } else {
-        products = await fetchAllProducts();
+        tempResponse = await fetchAllProducts();
       }
 
-      if (products) {
-        var mainContainer = document.getElementById("productContainer");
-        mainContainer.innerHTML = "";
-
-        for (var i = 0; i < products.length; i++) {
-          let id = products[i].id;
-          let title = products[i].title;
-          let price = products[i].price;
-          let description = products[i].description;
-          let category = products[i].category;
-          // let image =
-          let rating = products[i].rating;
-          let div = document.createElement("div");
-          div.innerHTML = `
-                <h2>${title}</h2>
-                ${price} <br>
-                ${description} <br>
-                ${category}
-                ${rating}
-            `;
-          mainContainer.append(div);
-          console.log(div);
-        }
+      if (!tempResponse) {
+        container.innerHTML = "Error with response";
+      } else {
+        tempResponse.forEach(product => {
+          const productDiv = document.createElement("div");
+          productDiv.classList.add("product-item");
+          productDiv.innerHTML = `
+            <h2>${product.title}</h2>
+            <p>Price: ${product.price}</p>
+            <p>Description: ${product.description}</p>
+            <p>Category: ${product.category}</p>
+            <p>Rating: ${product.rating}</p>
+          `;
+          container.appendChild(productDiv);
+        });
       }
+
     } catch (error) {
       console.error(error);
     }
@@ -60,10 +55,10 @@ const ReadView = () => {
               type="text"
               value={searchId}
               onChange={handleInputChange}
-              placeholder="Search for id..."
             />
             <button onClick={handleSearching}>Search or Show Everything</button>
-            <div id="productContainer"></div>
+            <div id="productContainer">
+            </div>
             <p>Content</p>
           </div>
         </div>
