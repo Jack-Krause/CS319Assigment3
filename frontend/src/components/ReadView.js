@@ -5,11 +5,13 @@ import { useSearchView } from "../context/SearchViewContext";
 const ReadView = () => {
   const { searchId, setSearchId } = useSearchView();
 
+
 // handle specific searches or general GET request
   const handleInputChange = (event) => {
     setSearchId(event.target.value);
   }
 
+  //
   const handleClick = async() => {
     if (searchId > 0) {
       getByIdFromDb(searchId);
