@@ -9,7 +9,8 @@ import UpdateView from "./components/UpdateView";
 import "./index.css";
 
 const App = () => {
-    const [dataLoaded, setDataLoaded] = useState(false);
+    // Hook to handle GET request (get all or search by id)
+    const [searchId, setSearchId] = useState(0);
 
   return (
     <Router>
@@ -17,7 +18,7 @@ const App = () => {
             <NavBar />
             <Routes>
                 <Route path = "/" element ={<ReadView
-                    dataLoaded = {dataLoaded}
+                    searchId = {dataLoaded}
                     isDataLoaded = {setDataLoaded}
                 />} />
                 <Route path = "/update" element = {<UpdateView />} />
