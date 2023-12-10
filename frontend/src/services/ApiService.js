@@ -1,6 +1,16 @@
 import React from "react";
 import axios from "axios";
 
+const getByIdFromDb = async (id) => {
+    try {
+        const mainContainer = document.getElementById("productContainer");
+        const response = await axios.get(`http://localhost:8081/getProduct/${id}`);
+        console.log(response.data);
+        loadData(mainContainer, response.data);
+    } catch (err) {
+        console.log("[getByIdFromDb error]", err);
+    }
+}
 
 const getFromDb = async () => {
     try {

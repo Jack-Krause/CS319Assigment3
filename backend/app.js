@@ -35,3 +35,24 @@ app.get("/listProducts", async(req, res) => {
     res.send(results);
 });
 
+// GET request method by id
+app.get("/getProduct/:id", async(req, res) => {
+    const productId = Number(req.params.id);
+    console.log("Looking for product:", productId);
+
+    await client.connect();
+    console.log("Node connected successfully to MongoDB for GET-id");
+    const query = {"id": productId}
+
+    const results = await db.collection("fakestore_catalog")
+        .findOne(query);
+
+    console.log("Result:", results);
+    if (!results) {
+        res.send("Not Found").status(404);
+    } else {
+        res.status(200);
+        res.send(results);
+    }
+});
+
