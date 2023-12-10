@@ -12,7 +12,7 @@ const ReadView = () => {
     handleSearching();
   };
 
-  const handleSearching = async (id) => {
+  const handleSearching = async () => {
     try {
       let products = null;
 
