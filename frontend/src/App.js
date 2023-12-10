@@ -7,20 +7,17 @@ import ReadView from "./components/ReadView";
 import StudentInfo from "./components/StudentInfo";
 import UpdateView from "./components/UpdateView";
 import "./index.css";
+import { SearchViewProvider } from "./context/SearchViewContext";
 
 const App = () => {
-    // Hook to handle GET request (get all or search by id)
-    const [searchId, setSearchId] = useState(0);
 
   return (
+    <SearchViewProvider>
     <Router>
         <div className = "App">
             <NavBar />
             <Routes>
-                <Route path = "/" element ={<ReadView
-                    searchId = {dataLoaded}
-                    isDataLoaded = {setDataLoaded}
-                />} />
+                <Route path = "/" element ={<ReadView />} />
                 <Route path = "/update" element = {<UpdateView />} />
                 <Route path = "/post" element = {<PostView />} />
                 <Route path = "/delete" element = {<DeleteView />} />
@@ -28,6 +25,7 @@ const App = () => {
             </Routes>
         </div>
     </Router>
+    </SearchViewProvider>
   );
 };
 

@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "axios";
 
-const getByIdFromDb = async (id) => {
+export const getByIdFromDb = async (id) => {
     try {
         const mainContainer = document.getElementById("productContainer");
+        mainContainer.innerHTML = "Loading product...";
         const response = await axios.get(`http://localhost:8081/getProduct/${id}`);
         console.log(response.data);
         loadData(mainContainer, response.data);
@@ -12,7 +13,7 @@ const getByIdFromDb = async (id) => {
     }
 }
 
-const getFromDb = async () => {
+export const getFromDb = async () => {
     try {
         const mainContainer = document.getElementById("productContainer");
         mainContainer.innerHTML = 'Loading products...';
@@ -27,7 +28,7 @@ const getFromDb = async () => {
 function loadData(mainContainer, products) {
     mainContainer.innerHTML = '';
 
-    for(var i = 0; i <products.length; i++) {
+    for(var i = 0; i < products.length; i++) {
         let id = products[i].id;
         let title = products[i].title;
         let price = products[i].price;
@@ -47,5 +48,3 @@ function loadData(mainContainer, products) {
         console.log(div);
     }
 }
-
-export default getFromDb;
