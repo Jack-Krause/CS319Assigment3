@@ -1,19 +1,22 @@
 import React from "react";
 import axios from "axios";
 
+
 const getFromDb = async () => {
     try {
+        const mainContainer = document.getElementById("productContainer");
+        mainContainer.innerHTML = 'Loading products...';
         const response = await axios.get("http://localhost:8081/listProducts");
         console.log(response.data);
-        loadData(response.data);
+        loadData(mainContainer, response.data);
     } catch (err) {
         console.error("[getFromDb error]", err);
     }
 };
 
-function loadData(products) {
-    var mainContainer = document.getElementById("productContainer");
-    
+function loadData(mainContainer, products) {
+    mainContainer.innerHTML = '';
+
     for(var i = 0; i <products.length; i++) {
         let id = products[i].id;
         let title = products[i].title;
