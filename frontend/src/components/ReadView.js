@@ -63,7 +63,7 @@ const ReadView = () => {
               placeholder="Search for id..."
             />
             <button onClick={handleSearching}>Search or Show Everything</button>
-            <pre id="productContainer"></pre>
+            <div id="productContainer"></div>
             <p>Content</p>
           </div>
         </div>
