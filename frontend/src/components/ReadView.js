@@ -1,10 +1,18 @@
 import React, {useState, useEffect} from "react";
-import { getFromDb, getByIdFromDb } from "../services/ApiService";
 import { useSearchView } from "../context/SearchViewContext";
 
 const ReadView = () => {
   // context methods and values from SearchViewContext
-  const { searchId, setSearchId, fetchAllProducts, fetchId } = useSearchView();
+  const { 
+    searchId, 
+    setSearchId, 
+    fetchId, 
+    fetchAllProducts,
+    setAllProducts,
+    allProducts,
+    setProductById,
+    productById
+  } = useSearchView();
 
   // handle changing the context of what the user searched
   const handleInputChange = (event) => {
@@ -13,34 +21,15 @@ const ReadView = () => {
   };
 
   const handleSearching = async () => {
-    var container = document.getElementById("productContainer");
-    container.innerHTML = "";
+
     try {
-      var tempResponse = null;
-
-      if (searchId > 0) {
-        tempResponse = await fetchId(searchId);
+      if (searchId.trim() === '') {
+        await fetchAllProducts();
+        setProductById(null);
       } else {
-        tempResponse = await fetchAllProducts();
+        await fetchId(searchId);
+        setAllProducts([]);
       }
-
-      if (!tempResponse) {
-        container.innerHTML = "Error with response";
-      } else {
-        tempResponse.forEach(product => {
-          const productDiv = document.createElement("div");
-          productDiv.classList.add("product-item");
-          productDiv.innerHTML = `
-            <h2>${product.title}</h2>
-            <p>Price: ${product.price}</p>
-            <p>Description: ${product.description}</p>
-            <p>Category: ${product.category}</p>
-            <p>Rating: ${product.rating}</p>
-          `;
-          container.appendChild(productDiv);
-        });
-      }
-
     } catch (error) {
       console.error(error);
     }
@@ -55,11 +44,38 @@ const ReadView = () => {
               type="text"
               value={searchId}
               onChange={handleInputChange}
+              placeHolder="Show All Products"
             />
-            <button onClick={handleSearching}>Search or Show Everything</button>
+            <button onClick={handleSearching}>
+              {searchId.trim() === '' 
+              ? 'Show All Products'
+              : isNaN(searchId) || !Number.isInteger(parseFloat(searchId))
+              ? 'Enter an integer for ID'
+              : `Show product ID: ${searchId}`}
+              </button>
             <div id="productContainer">
+              {searchId.trim() === '' ? (
+                allProducts.map((product, index) => (
+                  <div className="product-item" key={index}>
+                    <h2>{product.title}</h2>
+                    <p>Price: {product.price}</p>
+                    <p>Description: {product.desciption}</p>
+                    <p>Category: {product.category}</p>
+                    <p>Rating: {product.rating}</p>
+                  </div>
+                ))
+              ) : (
+                productById && (
+                <div className="product-item">
+                  <h2>{productById.title}</h2>
+                  <p>Price: {productById.price}</p>
+                  <p>Description: {productById.description}</p>
+                  <p>Category: {productById.category}</p>
+                  <p>Rating: {productById.rating}</p>
+                </div>
+                )
+              )}
             </div>
-            <p>Content</p>
           </div>
         </div>
       </main>

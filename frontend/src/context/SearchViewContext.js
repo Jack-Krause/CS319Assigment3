@@ -1,16 +1,18 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import { getByIdFromDb, getFromDb } from "../services/ApiService";
 
 const SearchViewContext = createContext();
 
 export const SearchViewProvider = ({ children }) => {
-  const [searchId, setSearchId] = useState(0);
+  const [searchId, setSearchId] = useState('');
+  const [allProducts, setAllProducts] = useState([]);
+  const [productById, setProductById] = useState(null);
 
-  // Call ApiService method to send GET request
+  // Call ApiService method to send GET request and sets the products
   const fetchAllProducts = async () => {
     try {
       const data = await getFromDb();
-      return data;
+      setAllProducts(data);
     } catch (err) {
       console.error("[fetchAllProducts error]", err);
       throw err;
@@ -21,15 +23,30 @@ export const SearchViewProvider = ({ children }) => {
   const fetchId = async (id) => {
     try {
       const data = await getByIdFromDb(id);
-      return data;
+      setProductById(data);
     } catch (err) {
       console.error("[fetchId error]", err);
       throw err;
     }
   };
 
+  // loads all products and sets them to the state as the component renders
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
+
   return (
-    <SearchViewContext.Provider value={{ searchId, setSearchId, fetchId, fetchAllProducts }}>
+    <SearchViewContext.Provider 
+    value={{ 
+      searchId, 
+      setSearchId, 
+      fetchId, 
+      fetchAllProducts,
+      setAllProducts,
+      allProducts,
+      setProductById,
+      productById
+    }}>
       {children}
     </SearchViewContext.Provider>
   );
