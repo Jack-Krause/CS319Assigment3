@@ -271,7 +271,7 @@ const UpdateView = () => {
                     placeholder="Enter Product Rating"
                     className="form-control mb-3"
                   />
-                  <button type="submit">Post Product</button>
+                  <button type="submit">Update Product</button>
                 </div>
               </form>
               {postStatusMessage && (

@@ -46,3 +46,13 @@ export const putToDb = async (updatedProduct) => {
         throw error;
     }
 };
+
+export const deleteFromDb = async (productToDelete) => {
+    try {
+        const response = await axios.delete(`http://127.0.0.1:4000/deleteProduct/${productToDelete}`);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error received in ApiService Delete");
+    }
+}

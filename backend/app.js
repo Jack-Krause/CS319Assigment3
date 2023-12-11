@@ -101,3 +101,21 @@ app.put("/updateProduct", async(req, res) => {
         res.status(500).send(error.message);
     }
 });
+
+app.delete("/deleteProduct/:id", async(req, res) => {
+    try {
+        const productId = req.params.id;
+
+        const deletedProduct = await Product.findOneAndDelete(
+            { id: productId }
+        );
+
+        if (!deletedProduct) {
+            return res.status(404).send("Not found");
+        }
+
+        res.status(200).send("Product deleted success");
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
