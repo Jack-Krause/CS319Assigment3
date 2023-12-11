@@ -3,7 +3,6 @@ var cors = require("cors");
 var app = express();
 var fs = require("fs");
 var bodyParser = require("body-parser");
-var axios = require("axios");
 const { MongoClient } = require("mongodb");
 const mongoose = require("mongoose");
 const Product = require("./productModel");
@@ -12,14 +11,23 @@ const path = require("path");
 app.use(cors());
 app.use(bodyParser.json());
 
-const port = "4000";
+const port = 4000;
 const host = "127.0.0.1";
-const url = "mongodb://127.0.0.1:27017";
-const dbName = "reactdata";
-const client = new MongoClient(url);
-const db = client.db(dbName);
+const url = "mongodb://127.0.0.1:27017/reactdata";
+
+mongoose.connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+});
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error"));
+db.once("open", () => {
+    console.log("Connected to MongoDB");
+});
 
 app.listen(port, () => {
     console.log("App listening at http://%s:%s", host, port);
@@ -27,38 +35,29 @@ app.listen(port, () => {
 
 // GET request method
 app.get("/listProducts", async(req, res) => {
-    await client.connect();
-    console.log("Node connected successfully to MongoDB for GET");
-    const query = {};
-    const results = await db
-        .collection("fakestore_catalog")
-        .find(query)
-        .limit(100)
-        .toArray();
-    console.log(results);
-    res.status(200);
-    res.send(results);
+    try {
+        const results = await Product.find().limit(100);
+        console.log(results);
+        res.status(200).send(results);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 // GET request method by id
 app.get("/getProduct/:id", async(req, res) => {
-    const productId = Number(req.params.id);
-    console.log("Looking for product:", productId);
-
-    await client.connect();
-    console.log("Node connected successfully to MongoDB for GET-id");
-    const query = {"id": productId}
-
-    const results = await db
-        .collection("fakestore_catalog")
-        .findOne(query)
-
-    console.log("Result:", results);
-    if (!results) {
-        res.send("Not Found").status(404);
-    } else {
-        res.status(200);
-        res.send(results);
+    try {
+        const productId = req.params.id;
+        const result = Product.findOne({ id: productId });
+        
+        console.log("Result:", result);
+        if (!result) {
+            res.status(404).send("not found");
+        } else {
+            res.status(200).send(result);
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
     }
 });
 
@@ -66,7 +65,15 @@ app.get("/getProduct/:id", async(req, res) => {
 app.post("/addProduct", async(req, res) => {
     try {
         const { id, title, price, description, category, image, rating } = req.body;
+        const productToPost = new Product(
+            {
+                id, title, price, description, category, image, rating
+            }
+        );
 
-        const 
+        await productToPost.save();
+        res.status(201).send("Post success");
+    } catch (error) {
+        res.status(500).send(error.message);
     }
-})
+});
