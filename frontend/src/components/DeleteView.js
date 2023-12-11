@@ -39,7 +39,8 @@ const DeleteView = () => {
       <div className = "container mt-5">
       <div className="jumbotron">
         <h1 className="display-4 text-center text-primary">Home: View Our Products!</h1>
-        <p className="lead text-center">Explore amazing products and more!</p>
+        <p className="lead text-center">Explore our amazing products. <br />
+        Try searching by an item's ID. Or leave the search bar empty and see everything!</p>
       </div>
         <div className="row justify-content-center">
           <div className="col-md-8">
@@ -48,9 +49,9 @@ const DeleteView = () => {
               value={searchId}
               onChange={handleInputChange}
               placeholder="Enter an ID"
-              className="form-control md-2"
+              className="form-control m-1"
             />
-            <button onClick={handleSearching} className="btn btn-primary mb-2">
+            <button onClick={handleSearching} className="btn btn-primary m-3">
               {searchId.trim() === ""
                 ? "Show All Products"
                 : isNaN(searchId) || !Number.isInteger(parseFloat(searchId))
