@@ -36,6 +36,7 @@ const ReadView = () => {
   return (
     <div>
       <main>
+      <div className = "container mt-5">
         <div className="row">
           <div className="col-md-8">
             <input
@@ -43,8 +44,9 @@ const ReadView = () => {
               value={searchId}
               onChange={handleInputChange}
               placeholder="Enter an ID"
+              className="form-control md-2"
             />
-            <button onClick={handleSearching}>
+            <button onClick={handleSearching} className="btn btn-primary mb-2">
               {searchId.trim() === ""
                 ? "Show All Products"
                 : isNaN(searchId) || !Number.isInteger(parseFloat(searchId))
@@ -53,32 +55,37 @@ const ReadView = () => {
             </button>
             <div id="productContainer">
               {productById ? (
-                <div className="product-item">
-                  <h2>
+                <div className="card mb-3">
+                  <div className="card-body">
+                  <h2 className="card-title">
                     ID: {productById.id} {productById.title}
                   </h2>
-                  <p>Price: {productById.price}</p>
-                  <img src={productById.image} alt={productById.title} />
-                  <p>Description: {productById.description}</p>
-                  <p>Category: {productById.category}</p>
-                  <p>Rating: {productById.rating}</p>
+                  <p className="card-text">Price: {productById.price}</p>
+                  <img src={productById.image} alt={productById.title} className="card-img-top prod-img"/>
+                  <p className="card-text">Description: {productById.description}</p>
+                  <p className="card-text">Category: {productById.category}</p>
+                  <p className="card-text">Rating: {productById.rating}</p>
+                  </div>
                 </div>
               ) : (
                 allProducts.map((product, index) => (
-                  <div className="product-item" key={index}>
-                    <h2>
+                  <div className="card mb-3" key={index}>
+                    <div className="card-body">
+                    <h2 className="card-title">
                       ID: {product.id} - {product.title}
                     </h2>
-                    <p>Price: {product.price}</p>
-                    <img src={product.image} alt={product.title} />
-                    <p>Description: {product.desciption}</p>
-                    <p>Category: {product.category}</p>
-                    <p>Rating: {product.rating}</p>
+                    <p className="card-text">Price: {product.price}</p>
+                    <img src={product.image} alt={product.title} className="card-img-top" />
+                    <p className="card-text">Description: {product.desciption}</p>
+                    <p className="card-text">Category: {product.category}</p>
+                    <p className="card-text">Rating: {product.rating}</p>
+                    </div>
                   </div>
                 ))
               )}
             </div>
           </div>
+        </div>
         </div>
       </main>
       <footer className="footer mt-auto py-3 bg-light">
