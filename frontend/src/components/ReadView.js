@@ -81,7 +81,7 @@ const ReadView = () => {
                     </h2>
                     <p className="card-text">Price: {product.price}</p>
                     <img src={product.image} alt={product.title} className="medium-img card-img-top" />
-                    <p className="card-text">Description: {product.desciption}</p>
+                    <p className="card-text">Description: {product.description}</p>
                     <p className="card-text">Category: {product.category}</p>
                     <p className="card-text">Rating: {product.rating}</p>
                     </div>

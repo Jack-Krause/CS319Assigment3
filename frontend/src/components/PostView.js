@@ -174,7 +174,7 @@ const PostView = () => {
                             className="medium-img card-img-top"
                           />
                           <p className="card-text">
-                            Description: {product.desciption}
+                            Description: {product.description}
                           </p>
                           <p className="card-text">
                             Category: {product.category}
