@@ -16,18 +16,15 @@ const host = "127.0.0.1";
 const url = "mongodb://127.0.0.1:27017/reactdata";
 
 mongoose.connect(url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true
-});
+})
+    .then(() => {
+        console.log("MongoDB connected");
+    })
+    .catch((error) => {
+        console.error("Error connecting to MongoDB", error);
+    });
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "MongoDB connection error"));
-db.once("open", () => {
-    console.log("Connected to MongoDB");
-});
 
 app.listen(port, () => {
     console.log("App listening at http://%s:%s", host, port);

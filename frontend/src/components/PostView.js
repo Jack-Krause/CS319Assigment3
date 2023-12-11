@@ -3,7 +3,6 @@ import { useSearchView } from "../context/SearchViewContext";
 import { postToDb } from "../services/ApiService";
 
 const PostView = () => {
-
   // context methods and values from SearchViewContext
   const {
     searchId,
@@ -39,25 +38,26 @@ const PostView = () => {
     event.preventDefault();
 
     if (validate) {
-        postToDb(productData)
-          .then((response) => {
-            console.log("Post Response success:", response.data);
-            setPostStatusMessage("Post was a success! Search for the new product using ID or general search.");
-            clearInputForm();
-          })
-          .catch((error) => {
-            console.error("Post Error:", error);
-            setPostStatusMessage("Error when posting. Check input fields.");
-          });
+      postToDb(productData)
+        .then((response) => {
+          console.log("Post Response success:", response.data);
+          setPostStatusMessage(
+            "Post was a success! Search for the new product using ID or general search."
+          );
+          clearInputForm();
+        })
+        .catch((error) => {
+          console.error("Post Error:", error);
+          setPostStatusMessage("Error when posting. Check input fields.");
+        });
     } else {
       setPostStatusMessage("Invalid Input");
-    };
+    }
+  };
 
-
-    //ApiService.addNewProduct(productInfo)
-    //Reset product state
+  //ApiService.addNewProduct(productInfo)
+  //Reset product state
   const clearInputForm = () => {
-
     setProductData({
       id: "",
       title: "",
@@ -73,12 +73,12 @@ const PostView = () => {
   const validate = () => {
     return (
       productData.id &&
-      productData.title && 
+      productData.title &&
       productData.price &&
       productData.category &&
       productData.image &&
-      ! isNaN(productData.price) &&
-      ! isNaN(productInfo.rating)
+      !isNaN(productData.price) &&
+      !isNaN(productData.rating)
     );
   };
 
@@ -184,10 +184,14 @@ const PostView = () => {
           </div>
           <div className="row justify-content-center">
             <div className="col-md-8">
-              <h2 className="display-4 text-center text-primary">Add new Product:</h2>
+              <h2 className="display-4 text-center text-primary">
+                Add new Product:
+              </h2>
               <form onSubmit={handleUserFormSubmit}>
                 <div className="form-group">
-                  <label htmlFor="id" className="form-label">ID:</label>
+                  <label htmlFor="id" className="form-label">
+                    ID:
+                  </label>
                   <input
                     type="text"
                     name="id"
@@ -196,7 +200,9 @@ const PostView = () => {
                     placeholder="Enter Integer ID"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="title" className="form-label">Title:</label>
+                  <label htmlFor="title" className="form-label">
+                    Title:
+                  </label>
                   <input
                     type="text"
                     name="title"
@@ -205,7 +211,9 @@ const PostView = () => {
                     placeholder="Enter Product Title"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="price" className="form-label">Price:</label>
+                  <label htmlFor="price" className="form-label">
+                    Price:
+                  </label>
                   <input
                     type="text"
                     name="price"
@@ -214,7 +222,9 @@ const PostView = () => {
                     placeholder="Enter Product Price"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="description" className="form-label">Description:</label>
+                  <label htmlFor="description" className="form-label">
+                    Description:
+                  </label>
                   <input
                     type="text"
                     name="description"
@@ -223,7 +233,9 @@ const PostView = () => {
                     placeholder="Enter Description of Product"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="category" className="form-label">Category:</label>
+                  <label htmlFor="category" className="form-label">
+                    Category:
+                  </label>
                   <input
                     type="text"
                     name="category"
@@ -232,7 +244,9 @@ const PostView = () => {
                     placeholder="Enter Product Category"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="image" className="form-label">Image URL:</label>
+                  <label htmlFor="image" className="form-label">
+                    Image URL:
+                  </label>
                   <input
                     type="text"
                     name="image"
@@ -241,7 +255,9 @@ const PostView = () => {
                     placeholder="Enter URL of image"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="rating" className="form-label">Rating (1-5):</label>
+                  <label htmlFor="rating" className="form-label">
+                    Rating (1-5):
+                  </label>
                   <input
                     type="text"
                     name="rating"
@@ -254,9 +270,15 @@ const PostView = () => {
                 </div>
               </form>
               {postStatusMessage && (
-              <div className = {`alert ${postStatusMessage.includes("success") ? "alert-success" : "alert-danger"}`}>
-                {postStatusMessage}
-              </div>
+                <div
+                  className={`alert ${
+                    postStatusMessage.includes("success")
+                      ? "alert-success"
+                      : "alert-danger"
+                  }`}
+                >
+                  {postStatusMessage}
+                </div>
               )}
             </div>
           </div>
