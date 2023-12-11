@@ -5,6 +5,8 @@ var fs = require("fs");
 var bodyParser = require("body-parser");
 var axios = require("axios");
 const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
+const Product = require("./productModel");
 const path = require("path");
 
 app.use(cors());
@@ -60,3 +62,11 @@ app.get("/getProduct/:id", async(req, res) => {
     }
 });
 
+// POST request method - add to the mongodb
+app.post("/addProduct", async(req, res) => {
+    try {
+        const { id, title, price, description, category, image, rating } = req.body;
+
+        const 
+    }
+})

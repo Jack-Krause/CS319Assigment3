@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSearchView } from "../context/SearchViewContext";
+import { postToDb } from "../services/ApiService";
 
 const PostView = () => {
 
@@ -16,6 +17,7 @@ const PostView = () => {
   } = useSearchView();
 
   //useState fields
+  const [postStatusMessage, setPostStatusMessage] = useState(""); //Logged message on success of post request
   const [productData, setProductData] = useState({
     id: "",
     title: "",
@@ -32,12 +34,30 @@ const PostView = () => {
     setProductData({ ...productData, [name]: value });
   };
 
-  // Validate user input, if passes reset and send request to ServiceApi, reset state object
+  // Validate user input - if passes, reset and send request to ServiceApi, reset state object
   const handleUserFormSubmit = (event) => {
     event.preventDefault();
 
+    if (validate) {
+        postToDb(productData)
+          .then((response) => {
+            console.log("Post Response success:", response.data);
+            setPostStatusMessage("Post was a success! Search for the new product using ID or general search.");
+            clearInputForm();
+          })
+          .catch((error) => {
+            console.error("Post Error:", error);
+            setPostStatusMessage("Error when posting. Check input fields.");
+          });
+    } else {
+      setPostStatusMessage("Invalid Input");
+    };
+
+
     //ApiService.addNewProduct(productInfo)
     //Reset product state
+  const clearInputForm = () => {
+
     setProductData({
       id: "",
       title: "",
@@ -49,7 +69,7 @@ const PostView = () => {
     });
   };
 
-  // 
+  // check user input for conformity (simple for this project requirements)
   const validate = () => {
     return (
       productData.id &&
@@ -230,8 +250,14 @@ const PostView = () => {
                     placeholder="Enter Product Rating"
                     className="form-control mb-3"
                   />
+                  <button type="submit">Post Product</button>
                 </div>
               </form>
+              {postStatusMessage && (
+              <div className = {`alert ${postStatusMessage.includes("success") ? "alert-success" : "alert-danger"}`}>
+                {postStatusMessage}
+              </div>
+              )}
             </div>
           </div>
         </div>

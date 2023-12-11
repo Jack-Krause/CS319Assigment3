@@ -24,3 +24,14 @@ export const getFromDb = async () => {
         throw err;
     }
 };
+
+export const postToDb = async (productInfo) => {
+    try {
+        const response = await axios.post("http://127.0.0.1:4000/addProduct", productInfo);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error recieved in ApiService", error);
+        throw error;
+    }
+};
