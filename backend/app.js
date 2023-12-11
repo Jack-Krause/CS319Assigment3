@@ -74,3 +74,5 @@ app.post("/addProduct", async(req, res) => {
         res.status(500).send(error.message);
     }
 });
+
+// PUT request method - update and existing product from the db

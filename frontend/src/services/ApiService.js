@@ -16,7 +16,7 @@ export const getByIdFromDb = async (id) => {
 // Call general GET request endpoint
 export const getFromDb = async () => {
     try {
-        const response = await axios.get("http:///127.0.0.1:4000/listProducts");
+        const response = await axios.get("http://127.0.0.1:4000/listProducts");
         console.log(response.data);
         return response.data;
     } catch (err) {
@@ -32,6 +32,17 @@ export const postToDb = async (productInfo) => {
         return response.data;
     } catch (error) {
         console.error("Error recieved in ApiService", error);
+        throw error;
+    }
+};
+
+export const putToDb = async (updatedProduct) => {
+    try {
+        const response = await axios.put("http://127.0.0.1:4000/updateProduct", updatedProduct);
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        console.error("Error received in ApiService put", error);
         throw error;
     }
 };
