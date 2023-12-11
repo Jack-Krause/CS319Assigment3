@@ -26,11 +26,13 @@ const PostView = () => {
     rating: "",
   });
 
+  // Update state object on user input
   const handleUserFormChange = (event) => {
     const { name, value } = event.target;
     setProductData({ ...productData, [name]: value });
   };
 
+  // Validate user input, if passes reset and send request to ServiceApi, reset state object
   const handleUserFormSubmit = (event) => {
     event.preventDefault();
 
@@ -45,6 +47,19 @@ const PostView = () => {
       image: "",
       rating: "",
     });
+  };
+
+  // 
+  const validate = () => {
+    return (
+      productData.id &&
+      productData.title && 
+      productData.price &&
+      productData.category &&
+      productData.image &&
+      ! isNaN(productData.price) &&
+      ! isNaN(productInfo.rating)
+    );
   };
 
   // handle changing the context of what the user searched
