@@ -58,6 +58,7 @@ const ReadView = () => {
                     ID: {productById.id} {productById.title}
                   </h2>
                   <p>Price: {productById.price}</p>
+                  <img src={productById.image} alt={productById.title} />
                   <p>Description: {productById.description}</p>
                   <p>Category: {productById.category}</p>
                   <p>Rating: {productById.rating}</p>
@@ -69,6 +70,7 @@ const ReadView = () => {
                       ID: {product.id} - {product.title}
                     </h2>
                     <p>Price: {product.price}</p>
+                    <img src={product.image} alt={product.title} />
                     <p>Description: {product.desciption}</p>
                     <p>Category: {product.category}</p>
                     <p>Rating: {product.rating}</p>

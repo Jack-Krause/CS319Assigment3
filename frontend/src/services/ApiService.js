@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getByIdFromDb = async (id) => {
     try {
-        const response = await axios.get(`http://localhost:8081/getProduct/${id}`);
+        const response = await axios.get(`http://127.0.0.1:4000/getProduct/${id}`);
         console.log(response.data);
         return response.data;
     } catch (err) {
@@ -14,7 +14,7 @@ export const getByIdFromDb = async (id) => {
 
 export const getFromDb = async () => {
     try {
-        const response = await axios.get("http://localhost:8081/listProducts");
+        const response = await axios.get("http:///127.0.0.1:4000/listProducts");
         console.log(response.data);
         return response.data;
     } catch (err) {
