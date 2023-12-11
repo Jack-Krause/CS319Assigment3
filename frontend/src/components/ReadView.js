@@ -38,8 +38,8 @@ const ReadView = () => {
       <main>
       <div className = "container mt-5">
       <div className="jumbotron">
-        <h1 className="display-4 text-center text-primary">Home: View Our Products!</h1>
-        <p className="lead text-center">Explore our amazing products. <br />
+        <h1 className="display-4 text-center text-primary">Home: View Your Inventory!</h1>
+        <p className="lead text-center">Explore products saved for you.<br />
         Try searching by an item's ID. Or leave the search bar empty and see everything!</p>
       </div>
         <div className="row justify-content-center">

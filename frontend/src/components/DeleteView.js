@@ -38,9 +38,9 @@ const DeleteView = () => {
       <main>
       <div className = "container mt-5">
       <div className="jumbotron">
-        <h1 className="display-4 text-center text-primary">Home: View Our Products!</h1>
-        <p className="lead text-center">Explore our amazing products. <br />
-        Try searching by an item's ID. Or leave the search bar empty and see everything!</p>
+        <h1 className="display-4 text-center text-primary">Delete: Remove Our Products!</h1>
+        <p className="lead text-center">Never want to see a specific item again? <br />
+        Perfect. Delete it using it's ID.</p>
       </div>
         <div className="row justify-content-center">
           <div className="col-md-8">

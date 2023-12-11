@@ -6,18 +6,18 @@ const NavBar = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <Link className="navbar-brand text-title px-3" to="/">
-          Home
+          Inventory Manager
         </Link>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav ml-auto flex-fill">
-            <li className="nav-item">
-              <Link className="nav-link gen-nav1 px-3" to="/post">
-                Create Products
+          <li className="nav-item">
+              <Link className="nav-link gen-nav2" to="/">
+                View Products
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link gen-nav2" to="/">
-                View Products
+              <Link className="nav-link gen-nav1 px-3" to="/post">
+                Post Products
               </Link>
             </li>
             <li className="nav-item">
