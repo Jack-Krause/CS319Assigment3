@@ -5,13 +5,13 @@ const NavBar = () => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <Link className="navbar-brand text-title" to="/">
+        <Link className="navbar-brand text-title px-3" to="/">
           Home
         </Link>
         <div className="collapse navbar-collapse">
-          <ul className="navbar-nav ml-auto">
+          <ul className="navbar-nav ml-auto flex-fill">
             <li className="nav-item">
-              <Link className="nav-link gen-nav1" to="/post">
+              <Link className="nav-link gen-nav1 px-3" to="/post">
                 Create Products
               </Link>
             </li>

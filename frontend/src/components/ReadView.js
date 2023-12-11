@@ -37,16 +37,21 @@ const ReadView = () => {
     <div>
       <main>
       <div className = "container mt-5">
-        <div className="row">
+      <div className="jumbotron">
+        <h1 className="display-4 text-center text-primary">Home: View Our Products!</h1>
+        <p className="lead text-center">Explore our amazing products. <br />
+        Try searching by an item's ID. Or leave the search bar empty and see everything!</p>
+      </div>
+        <div className="row justify-content-center">
           <div className="col-md-8">
             <input
               type="text"
               value={searchId}
               onChange={handleInputChange}
               placeholder="Enter an ID"
-              className="form-control md-2"
+              className="form-control m-1"
             />
-            <button onClick={handleSearching} className="btn btn-primary mb-2">
+            <button onClick={handleSearching} className="btn btn-primary m-3">
               {searchId.trim() === ""
                 ? "Show All Products"
                 : isNaN(searchId) || !Number.isInteger(parseFloat(searchId))
@@ -61,8 +66,8 @@ const ReadView = () => {
                     ID: {productById.id} {productById.title}
                   </h2>
                   <p className="card-text">Price: {productById.price}</p>
-                  <img src={productById.image} alt={productById.title} className="card-img-top prod-img"/>
-                  <p className="card-text">Description: {productById.description}</p>
+                  <img src={productById.image} alt={productById.title} className="text-center medium-img card-img-top prod-img"/>
+                  <p className="card-text text-center">Description: {productById.description}</p>
                   <p className="card-text">Category: {productById.category}</p>
                   <p className="card-text">Rating: {productById.rating}</p>
                   </div>
@@ -75,7 +80,7 @@ const ReadView = () => {
                       ID: {product.id} - {product.title}
                     </h2>
                     <p className="card-text">Price: {product.price}</p>
-                    <img src={product.image} alt={product.title} className="card-img-top" />
+                    <img src={product.image} alt={product.title} className="medium-img card-img-top" />
                     <p className="card-text">Description: {product.desciption}</p>
                     <p className="card-text">Category: {product.category}</p>
                     <p className="card-text">Rating: {product.rating}</p>
