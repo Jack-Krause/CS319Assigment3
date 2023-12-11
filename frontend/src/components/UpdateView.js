@@ -167,7 +167,7 @@ const UpdateView = () => {
                           className="medium-img card-img-top"
                         />
                         <p className="card-text">
-                          Description: {product.desciption}
+                          Description: {product.description}
                         </p>
                         <p className="card-text">
                           Category: {product.category}
@@ -192,6 +192,7 @@ const UpdateView = () => {
                   </label>
                   <input
                     type="text"
+                    id="id"
                     name="id"
                     value={updatedProduct.id}
                     onChange={handleUserFormChange}
@@ -203,6 +204,7 @@ const UpdateView = () => {
                   </label>
                   <input
                     type="text"
+                    id="title"
                     name="title"
                     value={updatedProduct.title}
                     onChange={handleUserFormChange}
@@ -214,6 +216,7 @@ const UpdateView = () => {
                   </label>
                   <input
                     type="text"
+                    id="price"
                     name="price"
                     value={updatedProduct.price}
                     onChange={handleUserFormChange}
@@ -225,6 +228,7 @@ const UpdateView = () => {
                   </label>
                   <input
                     type="text"
+                    id="description"
                     name="description"
                     value={updatedProduct.description}
                     onChange={handleUserFormChange}
@@ -236,6 +240,7 @@ const UpdateView = () => {
                   </label>
                   <input
                     type="text"
+                    id="category"
                     name="category"
                     value={updatedProduct.category}
                     onChange={handleUserFormChange}
@@ -247,6 +252,7 @@ const UpdateView = () => {
                   </label>
                   <input
                     type="text"
+                    id="image"
                     name="image"
                     value={updatedProduct.image}
                     onChange={handleUserFormChange}
@@ -258,6 +264,7 @@ const UpdateView = () => {
                   </label>
                   <input
                     type="text"
+                    id="rating"
                     name="rating"
                     value={updatedProduct.rating}
                     onChange={handleUserFormChange}

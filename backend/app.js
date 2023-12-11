@@ -45,14 +45,10 @@ app.get("/listProducts", async(req, res) => {
 app.get("/getProduct/:id", async(req, res) => {
     try {
         const productId = req.params.id;
-        const result = Product.findOne({ id: productId });
+        const result = await Product.findOne({ id: productId });
         
         console.log("Result:", result);
-        if (!result) {
-            res.status(404).send("not found");
-        } else {
-            res.status(200).send(result);
-        }
+        res.status(200).send(result);
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -76,3 +72,32 @@ app.post("/addProduct", async(req, res) => {
 });
 
 // PUT request method - update and existing product from the db
+app.put("/updateProduct", async(req, res) => {
+    try {
+        const productId = req.body.id;
+        const { title, price, description, category, image, rating } = req.body;
+
+        const fieldsToUpdate = {};
+
+        if (title) fieldsToUpdate.title = title;
+        if (price) fieldsToUpdate.price = price;
+        if (description) fieldsToUpdate.description = description;
+        if (category) fieldsToUpdate.category = category;
+        if (image) fieldsToUpdate.image = image;
+        if (rating) fieldsToUpdate.rating = rating;
+
+        const updatedProduct = await Product.findOneAndUpdate(
+            { id: productId },
+            fieldsToUpdate,
+            { new: true }
+        );
+
+        if (updatedProduct === null) {
+            return res.status(404).send("Product was not pulled");
+        }
+        
+        res.status(200).send(updatedProduct);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
